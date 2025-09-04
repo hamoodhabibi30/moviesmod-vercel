@@ -2,26 +2,31 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/*.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/api/$1"
     }
   ],
-  "functions": {
-    "api/*.js": {
-      "maxDuration": 60
-    }
-  },
   "env": {
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "api/health.js": {
+      "maxDuration": 10
+    },
+    "api/catalog.js": {
+      "maxDuration": 30
+    },
+    "api/extract.js": {
+      "maxDuration": 60
+    },
+    "api/episodes.js": {
+      "maxDuration": 30
+    }
   }
 }
